@@ -1,1 +1,2 @@
-# SQL_Porortfolio-DVDRental-
+Hi,
+My name is Tomasz 
