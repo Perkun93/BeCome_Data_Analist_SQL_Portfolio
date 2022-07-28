@@ -30,102 +30,68 @@ where customer_id = 4 and customer_id = 1;
 select * from customer c 
 where customer_id = 4 or customer_id = 1;
 
+/*
+ * filtering ascending sescening defoult is set up asc
+ */
 select * from film f 
 order by film_id asc 
 
 select * from film f 
 order by film_id desc
 
+/*
+ * using like with % and _
+ */
+
 select  TITLE from film f 
-where TITLE like 'O%' or film_id = 4
+where TITLE like 'O%'
 
+/*
+ * serch 5 long title
+ */
 
-select distinct * from film f 
-order by film_id desc
-limit 5
+SELECT title FROM film f 
+WHERE title LIKE '_____'
 
-select count(film_id) from film f 
+/*
+ * serch 2 x 5 title
+ */
+ SELECT title FROM film f 
+WHERE title LIKE '_____ _____'
 
-select count(distinct film_id) from film 
+/*
+ *  
+ */
 
-select * from payment p 
+SELECT title FROM film f 
+WHERE title LIKE '%____ %____'
+
+/*
+ * select distinct
+ */
+
+/*
+ * porownanie ilosci klijentow w platnosci 
+ */ 
+
+SELECT customer_id  FROM payment p
+ORDER BY 1 ASC 
+
+SELECT DISTINCT(customer_id) FROM payment p  
+ORDER BY 1 ASC 
+LIMIT 5 
+
+SELECT DISTINct(customer_id) ,staff_id   ,payment_date  FROM payment p2 
+WHERE amount = 0
+
+select customer_id ,staff_id ,amount, payment_date 
+from payment p 
 where rental_id >= 1000
-
-select * from payment p 
-
-select staff_id , count(amount), sum(amount)  from payment p
-group by 1
-
-select * from address a 
-
-select * from customer c 
-
-/*
- * how many customer in store
- */
-
-select store_id, count(distinct customer_id) as many_client from customer c 
-group by 1
+AND payment_date BETWEEN '2007-01-01' AND '2007-06-01'
+ORDER BY 3 DESC 
 
 
-/*
- *avrage sales
-*/
-
-select store_id, round(avg(distinct customer_id),2) as avrage_amount_order  
-from customer c 
-	group by 1
-	order by 1 desc 
-	limit 1 
-
-/*
- * top order city sale
- */
-	
-select * from customer c
-
-select * from a
-
-select * from address a 
-
-select district ,count( distinct city_id) as sum_city  
-from address a 
-group by 1
-order by count(distinct city_id) desc 
-
-/*
- * find sum order from city 
- */
-select district ,count( distinct city_id) as sum_city  
-from address a 
-inner join customer c 
-on a.city_id = c.
-group by 1
-order by count(distinct city_id) desc 
 
 
-/*
-*ile filmow w danym jezyku]
-*srednia dlugosc filmu w oparciu o sklep
-*stock sklepu 
-*procent zarobku sklepu
- *procent zarabku sklepu w oparciu o date 
-*/
 
-select store_id , film_id from inventory i 
 
-select store_id , count( store_id), film_id from inventory i
-group by 1,3
-order by count(store_id) desc
-
-select film_id from inventory i 
-where film_id = 172 and store_id = 1
-
-select  * from payment p 
-
-select customer_id ,first_name,last_name, email, count(payment_id), sum(amount) from payment p
-inner join customer c 
-using (customer_id)
-group by 1 
-order by count(payment_id) desc
-limit 5
