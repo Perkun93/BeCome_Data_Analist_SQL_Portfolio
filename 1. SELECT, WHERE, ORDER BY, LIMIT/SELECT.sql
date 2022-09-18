@@ -84,6 +84,8 @@ SELECT customer_id , first_name , last_name ,email
 FROM customer c
 WHERE first_name LIKE 'H%'
 
+
+
 /*
  * mozemy cos dodac extra ... hm moze wybezmy cos  zeby trzeci znak nazwiska mial A jako znak 
 */
@@ -92,5 +94,70 @@ SELECT customer_id , first_name , last_name ,email
 FROM customer c
 WHERE first_name LIKE 'H%' AND 
 last_name LIKE '__r%'
+
+/*
+ * jak mozesz zobaczyv % odpowanda za wszyskie znaki nie wana jest dlugosc lecz _ odpowada za kazdy pojedynczy znak 
+ * */
+
+
+/*
+* pora na cos nowego
+*/
+
+SELECT *
+FROM payment p 
+
+/* wyciagnijmy cene produktow funkcja count liczt ilisc wierszy lecz gdy dodamy distinc to uzyskamly liczbe unikal;nych wierszy wiec sprawdzmy to 
+ * 
+ */
+
+SELECT amount 
+FROM payment p 
+
+SELECT count(amount)
+FROM payment p 
+
+/*
+ * wynik 14596
+ */
+
+SELECT count(DISTINCT (amount))
+FROM payment p 
+
+/*
+* wynik 19
+* wiec to dziala 
+ **/
+ 
+/*
+* sprawdzmy najwyzsza cene uzywyajac max
+*/
+
+SELECT max(amount)
+FROM payment p 
+
+/*
+ * i najnizsza uzyjacac min 
+*/
+
+SELECT min(amount)
+FROM payment p 
+
+
+/*
+* jak widzisz minimalna cena jest 0 cos tu nie gra wiedz sprawmy co przykominajac sobie where 
+*/
+
+SELECT *
+FROM payment p 
+WHERE amount = 0
+
+SELECT count(payment_id) 
+FROM payment p 
+WHERE amount = 0
+
+/*
+ * 24 klientow nie zaplacilo w sklepie 
+*/
 
 
