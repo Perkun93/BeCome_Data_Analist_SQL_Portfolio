@@ -46,7 +46,7 @@ SELECT first_name , last_name ,email
 FROM customer c
 ORDER BY first_name ASC 
 
-/* 
+ 
 
 
 /*
@@ -75,7 +75,7 @@ WHERE customer_id = 15
 
 
 /*
- * poszukajmy klientow o imieniu alan 
+ * We looking customare alan name 
  * 
  */
 
@@ -84,7 +84,7 @@ FROM customer c
 WHERE first_name = 'Alan'
 
 /*
- * ok swietna robota. teraz uzyjmy znaku specjalego aby wyciagnac wszystkie nazwiska zaczynajace sie na H uzywajac LIKE
+ * Grate job. next step will be using LIKE. Yea LIKE look how it working
 */
 
 SELECT customer_id , first_name , last_name ,email 
@@ -92,12 +92,67 @@ FROM customer c
 WHERE first_name LIKE 'H%'
 
 /*
- * mozemy cos dodac extra ... hm moze wybezmy cos  zeby trzeci znak nazwiska mial A jako znak 
+ * I use special mark % that mean after H can be everything.
+ * Just have look 
 */
 
 SELECT customer_id , first_name , last_name ,email 
 FROM customer c
 WHERE first_name LIKE 'H%' AND 
 last_name LIKE '__r%'
+
+
+SELECT customer_id , first_name , last_name ,email 
+FROM customer c
+WHERE first_name LIKE 'H%' OR 
+last_name LIKE '__r%'
+
+/*
+ * You can very SIMPLE sort date 
+ * look on payment table
+*/
+
+SELECT *
+FROM payment p 
+
+
+
+
+/*
+ * try sort pament date between 
+ */
+
+
+SELECT payment_id , staff_id , payment_id  
+FROM payment p 
+WHERE payment_date 
+BETWEEN  '2007-02-19' AND '2007-02-20' 
+AND staff_id = 2
+
+SELECT count(payment_id)  
+FROM payment p 
+WHERE payment_date 
+BETWEEN  '2007-02-19' AND '2007-02-20' 
+AND staff_id = 2
+
+
+SELECT count(payment_id)  
+FROM payment p 
+WHERE payment_date 
+NOT BETWEEN  '2007-02-19' AND '2007-02-20' 
+AND staff_id = 2
+
+
+
+/*
+ * remember if you usin and must be after betwen 
+ * hmm checy OR
+ */
+
+SELECT payment_id , staff_id , payment_id  
+FROM payment p 
+WHERE payment_date 
+BETWEEN  ("2007-02-19" AND "2007-02-20") OR ("2007-02-22" AND "2007-02-25")
+
 
 
