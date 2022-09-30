@@ -169,6 +169,7 @@ WHERE amount = 0
 */
 
 
+
 SELECT customer_id , first_name , last_name ,email 
 FROM customer c
 WHERE first_name LIKE 'H%' OR 
@@ -231,4 +232,18 @@ WHERE payment_date !=  '2007-02-19'
 AND  staff_id = 2
 
 
+SELECT count(payment_id) 
+FROM payment p 
+WHERE amount = 0
 
+SELECT count(payment_id) 
+FROM payment p 
+WHERE amount != 0
+
+SELECT (SELECT count(payment_id) 
+FROM payment p 
+WHERE amount = 0) / count(payment_id) * 100
+
+
+
+FROM payment p 

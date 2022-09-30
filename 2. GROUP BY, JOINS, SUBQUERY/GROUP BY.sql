@@ -118,6 +118,8 @@ GROUP BY 1
 HAVING sum(amount) > 100
 ORDER BY count(customer_id) DESC 
 
+
+
 SELECT count(*)
 FROM payment p 
 WHERE customer_id = 148
