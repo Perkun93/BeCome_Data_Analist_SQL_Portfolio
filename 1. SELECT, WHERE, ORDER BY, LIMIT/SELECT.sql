@@ -174,6 +174,11 @@ FROM customer c
 WHERE first_name LIKE 'H%' OR 
 last_name LIKE '__r%'
 
+SELECT customer_id , first_name , last_name ,email 
+FROM customer c
+WHERE first_name LIKE 'H%' OR 
+last_name NOT LIKE '__r%'
+
 /*
  * You can very SIMPLE sort date 
  * look on payment table
@@ -218,8 +223,12 @@ AND staff_id = 2
 
 SELECT payment_id , staff_id , payment_id  
 FROM payment p 
-WHERE payment_date 
-BETWEEN  ("2007-02-19" AND "2007-02-20") OR ("2007-02-22" AND "2007-02-25")
+WHERE payment_date >  '2007-02-19' 
+
+SELECT payment_id , staff_id , payment_id  
+FROM payment p 
+WHERE payment_date !=  '2007-02-19' 
+AND  staff_id = 2
 
 
 
