@@ -56,12 +56,12 @@ ORDER BY sum(amount) DESC
 SELECT *
 FROM inventory i 
 
-SELECT store_id , count( store_id), film_id 
+SELECT store_id , count( store_id) AS stock , film_id 
 FROM inventory i
 GROUP BY  1,3
 ORDER BY count(store_id) DESC
 
-SELECT store_id , count( store_id), film_id 
+SELECT store_id , count( store_id) AS stock  , film_id 
 FROM inventory i
 GROUP BY  1,3
 HAVING  store_id = 1
@@ -94,6 +94,7 @@ HAVING  store_id = 1
 
 SELECT customer_id, sum(amount)
 FROM payment p 
+
 GROUP BY 1 
 
 SELECT customer_id, sum(amount)
@@ -128,6 +129,8 @@ WHERE customer_id = 148
  * we will relationsship beetwen mpaa rating and a replemace cost 
  */
 
+
+
 SELECT *
 FROM film f
 
@@ -156,6 +159,62 @@ GROUP BY 1
 ORDER BY sum(amount) DESC 
 LIMIT 5
 
+/*
+ * time to joins 
+ *  Joins lacza tabele po danym kluczu 
+ * zobaczmy jeden z joinow 
+ * Inner join. laczy tabele A z tabela B po wspolnym kluczu ,ktorym moze byc film ID
+ * dla tego sprawdzmy 5 aktorow najczesciej pojawiajacych sie w filmach  
+ * jak mowi inner czyli wewnetrzny.
+ */
+
+
+SELECT * 
+FROM film f 
+
+SELECT *
+FROM actor a 
+
+SELECT fa.actor_id, fa.film_id, a.first_name , a.last_name  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+
+
+SELECT fa.actor_id, count( fa.film_id), a.first_name , a.last_name  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+GROUP BY 1,3,4
+ORDER BY count(fa.film_id)  DESC 
+
+
+/*
+ * kto
+ */
+
+
+SELECT *
+FROM film f 
+
+SELECT fa.actor_id, count( fa.film_id), a.first_name , a.last_name, avg(f.rental_rate)  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+INNER JOIN film 		AS f
+ON f.film_id = f.film_id 
+GROUP BY 1,3,4
+ORDER BY count(fa.film_id)  DESC 
+
+
+SELECT fa.actor_id, count( fa.film_id), a.first_name , a.last_name, sum(f.rental_rate)  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+INNER JOIN film 		AS f
+ON f.film_id = f.film_id 
+GROUP BY 1,3,4
+ORDER BY count(fa.film_id)  DESC 
 
 
 SELECT film_id 
