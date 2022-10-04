@@ -249,6 +249,19 @@ GROUP BY 1,2
 ORDER BY sum(p.amount) DESC 
 
 
+SELECT count(*)
+FROM film f 
+LEFT JOIN inventory i 
+ON f.film_id = i.film_id 
+LEFT JOIN rental r 
+ON i.inventory_id = r.inventory_id 
+LEFT JOIN payment p 
+ON r.rental_id = p.rental_id
+WHERE p.amount IS NULL
+
+
+
+
 SELECT p.payment_id 
 FROM payment p 
 le
