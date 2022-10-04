@@ -197,7 +197,7 @@ ORDER BY count(fa.film_id)  DESC
 SELECT *
 FROM film f 
 
-SELECT fa.actor_id, count( fa.film_id), a.first_name , a.last_name, avg(f.rental_rate)  
+SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name, avg(f.rental_rate) AS avrage_rental  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
@@ -205,16 +205,53 @@ INNER JOIN film 		AS f
 ON f.film_id = f.film_id 
 GROUP BY 1,3,4
 ORDER BY count(fa.film_id)  DESC 
+LIMIT 5
+
+SELECT count(*) 
+FROM film_actor fa 
+WHERE actor_id = 60
 
 
-SELECT fa.actor_id, count( fa.film_id), a.first_name , a.last_name, sum(f.rental_rate)  
+SELECT fa.actor_id, a.first_name , a.last_name,  count( fa.film_id) AS many_films, round(sum(f.rental_rate),2) AS sum_amount  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
 INNER JOIN film 		AS f
 ON f.film_id = f.film_id 
-GROUP BY 1,3,4
+GROUP BY 1,2,3
 ORDER BY count(fa.film_id)  DESC 
+LIMIT 5
+/*
+ * most amount film 
+ */
+
+SELECT *
+FROM payment p 
+
+SELECT * FROM rental r 
+
+SELECT *
+FROM film f 
+
+SELECT * 
+FROM inventory i 
+
+SELECT f.film_id, f.title, sum(p.amount)
+FROM film f 
+LEFT JOIN inventory i 
+ON f.film_id = i.film_id 
+LEFT JOIN rental r 
+ON i.inventory_id = r.inventory_id 
+LEFT JOIN payment p 
+ON r.rental_id = p.rental_id
+WHERE p.amount IS NOT NULL
+GROUP BY 1,2 
+ORDER BY sum(p.amount) DESC 
+
+
+SELECT p.payment_id 
+FROM payment p 
+le
 
 
 SELECT film_id 
