@@ -68,7 +68,7 @@ HAVING  store_id = 1
 ORDER BY count(store_id) DESC
 
 
-SELECT store_id , count( store_id), film_id 
+SELECT store_id , count(store_id), film_id 
 FROM inventory i
 WHERE film_id = 120
 GROUP BY  1,3
@@ -90,27 +90,30 @@ HAVING  store_id = 1
 /*
  * pratcise with group by and where 
  * 
- */
+ */ 
 
-SELECT customer_id, sum(amount)
-FROM payment p 
-
-GROUP BY 1 
-
-SELECT customer_id, sum(amount)
+SELECT customer_id, staff_id, sum(amount)
 FROM payment p 
 WHERE customer_id != (184)
-GROUP BY 1 
+GROUP BY 1,2 
+ORDER BY sum(amount) DESC LIMIT 5 
+
+
 /*
- * as you se != return us all with out customer id =1
- * i show you chow select more 
+ * as you se != return us all without customer id =1
+ * I  show you how select more 
+ */
+
+/*
+ * Look how use IN and NOT IN 
  */
 
 SELECT customer_id, sum(amount)
 FROM payment p 
-WHERE customer_id NOT IN  (87,477,273,51)
+WHERE customer_id IN  (87,477,273,51)
 GROUP BY 1 
 HAVING sum(amount) > 100
+ORDER BY count(customer_id) DESC 
 
 SELECT customer_id, sum(amount), count(customer_id) AS transactions  
 FROM payment p 
@@ -181,12 +184,40 @@ INNER JOIN actor		AS a
 ON fa.actor_id = a.actor_id 
 
 
-SELECT fa.actor_id, count( fa.film_id), a.first_name , a.last_name  
+SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
 GROUP BY 1,3,4
 ORDER BY count(fa.film_id)  DESC 
+
+/*
+ * opisac join
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -197,11 +228,22 @@ ORDER BY count(fa.film_id)  DESC
 SELECT *
 FROM film f 
 
+SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name,  avg(f.rental_rate) AS avrage_rental  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+LEFT JOIN film 		AS f
+ON f.film_id = f.film_id 
+GROUP BY 1,3,4
+ORDER BY count(fa.film_id)  DESC 
+LIMIT 5
+
+
 SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name, avg(f.rental_rate) AS avrage_rental  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
-INNER JOIN film 		AS f
+INNER  JOIN film 		AS f
 ON f.film_id = f.film_id 
 GROUP BY 1,3,4
 ORDER BY count(fa.film_id)  DESC 
@@ -248,6 +290,9 @@ WHERE p.amount IS NOT NULL
 GROUP BY 1,2 
 ORDER BY sum(p.amount) DESC 
 
+/*
+ * 
+ */
 
 SELECT count(*)
 FROM film f 

@@ -1,5 +1,6 @@
 /*
- * First SELECT just have look how it work*/
+ * First SELECT just have look how it work
+*/
 
 SELECT *
 FROM customer c 
@@ -13,8 +14,8 @@ SELECT first_name , last_name ,email
 FROM customer c 
 
 /*
-	* Good job. Now we thing... Maby we need just 10 first row.  
-	* Its time to use LIMIT
+ * Good job. Now we thing... Maby we need just 10 first row.  
+ * It's time to use LIMIT
 */
 
 SELECT first_name , last_name ,email 
@@ -22,10 +23,10 @@ FROM customer c
 LIMIT 10
 
 /*
-	* a z tych 10 intrsuje nas tylko 3.... uzyjmy Ofset  
-	* Hmm we have got 10 first record but your colegue ask you can you show row 4 til 7
-	* On this situlation you could using OFFSET is very simple.   	
-**/
+ * a z tych 10 intrsuje nas tylko 3.... uzyjmy Ofset  
+ * Hmm we have got 10 first record but your colegue ask you can you show row 4 til 7
+ * On this situlation you could using OFFSET is very simple.   	
+*/
 
 
 SELECT first_name , last_name ,email 
@@ -33,27 +34,25 @@ FROM customer c
 LIMIT 3 OFFSET 3
 
 /*
-	 * This can be litle beit conufis for you if you dont know why i set offset on 3 
-	 * that vey simple. if we wanna get record 4 we begin from row 3 this is zero point for sql next one will be this row witch we looking.
+ * This can be litle beit conufis for you if you dont know why i set offset on 3 
+ * that vey simple. if we wanna get record 4 we begin from row 3 this is zero point for sql next one will be this row witch we looking.
 */
 
 /*
-	* All right now we look how we can sort descending our recored 
-	* To sort record we using ORDER BY ... Hmmm and you have good thing if wanna do this you need add DESC minss Descending
+ * All right now we look how we can sort descending our recored 
+ * To sort record we using ORDER BY ... 
+ * Hmmm and you have good thing if wanna do this you need add DESC minss Descending
 */
 
 SELECT first_name , last_name ,email 
 FROM customer c
 ORDER BY first_name ASC 
 
- 
-
-
 /*
- 	* Ascending sort is set up amtomaticli 
-  	* You can sort more than one colum 
-	* And instead of column name you can use number of column 
-	* and sort using cuple column 
+ * Ascending sort is set up amtomaticli 
+ * You can sort more than one colum 
+ * And instead of column name you can use number of column 
+ * and sort using cuple column 
  */
 
 SELECT first_name , last_name ,email 
@@ -62,11 +61,10 @@ ORDER BY 1, 2 DESC
 
 
 /*
-	* Lets go. Time to first where.
-	* It is query to filter our record. Hmm ofcoure time for check this on pratise 
- 	* Finde customer with ID = 15 
-
- */
+* Lets go. Time to first where.
+* It is query to filter our record. Hmm ofcoure time for check this on pratise 
+* Finde customer with ID = 15 
+*/
 
 
 SELECT * 
@@ -75,8 +73,7 @@ WHERE customer_id = 15
 
 
 /*
- * We looking customare alan name 
- * 
+ * We looking customare alan name  
  */
 
 SELECT customer_id , first_name , last_name ,email 
@@ -85,7 +82,7 @@ WHERE first_name = 'Alan'
 
 /*
  * Grate job. next step will be using LIKE. Yea LIKE look how it working
-*/
+ */
 
 SELECT customer_id , first_name , last_name ,email 
 FROM customer c
@@ -96,7 +93,7 @@ WHERE first_name LIKE 'H%'
 /*
  * I use special mark % that mean after H can be everything.
  * Just have look 
-*/
+ */
 
 SELECT customer_id , first_name , last_name ,email 
 FROM customer c
@@ -105,12 +102,12 @@ last_name LIKE '__r%'
 
 /*
  * jak mozesz zobaczyv % odpowanda za wszyskie znaki nie wana jest dlugosc lecz _ odpowada za kazdy pojedynczy znak 
- * */
+ */
 
 
 /*
-* pora na cos nowego
-*/
+ * pora na cos nowego
+ */
 
 SELECT *
 FROM payment p 
