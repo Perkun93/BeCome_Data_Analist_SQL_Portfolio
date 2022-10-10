@@ -1,5 +1,5 @@
 /*
- * First SELECT just have look how it work
+ * First SELECT just have look how it works
 */
 
 SELECT *
@@ -14,7 +14,7 @@ SELECT first_name , last_name ,email
 FROM customer c 
 
 /*
- * Good job. Now we thing... Maby we need just 10 first row.  
+ * Good job. Now we think... What if we need just 10 first row ? 
  * It's time to use LIMIT
 */
 
@@ -23,8 +23,7 @@ FROM customer c
 LIMIT 10
 
 /*
- * a z tych 10 intrsuje nas tylko 3.... uzyjmy Ofset  
- * Hmm we have got 10 first record but your colegue ask you can you show row 4 til 7
+ * From those 10 rows we are interesting only three rows between 4 and 7  
  * On this situlation you could using OFFSET is very simple.   	
 */
 
@@ -34,8 +33,8 @@ FROM customer c
 LIMIT 3 OFFSET 3
 
 /*
- * This can be litle beit conufis for you if you dont know why i set offset on 3 
- * that vey simple. if we wanna get record 4 we begin from row 3 this is zero point for sql next one will be this row witch we looking.
+ * This can be little bit confused for you if you don't know why I had set OFFSET on 3 
+ * That vey simple. If we want get record 4 we begin from row 3 this is point zero for sql next one will be this row witch we looking.
 */
 
 /*
