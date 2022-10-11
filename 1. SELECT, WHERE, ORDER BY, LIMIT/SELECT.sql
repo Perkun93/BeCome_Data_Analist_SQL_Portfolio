@@ -40,12 +40,13 @@ LIMIT 3 OFFSET 3
 /*
  * All right now we look how we can sort descending our recored 
  * To sort record we using ORDER BY ... 
- * Hmmm and you have good thing if wanna do this you need add DESC minss Descending
+ * Hmmm and you have good think. We should like use DESC to sort Descending
+ *
 */
 
 SELECT first_name , last_name ,email 
 FROM customer c
-ORDER BY first_name ASC 
+ORDER BY first_name DESC 
 
 /*
  * Ascending sort is set up amtomaticli 
@@ -72,7 +73,7 @@ WHERE customer_id = 15
 
 
 /*
- * We looking customare alan name  
+ * We looking customare Alan name  
  */
 
 SELECT customer_id , first_name , last_name ,email 
@@ -210,36 +211,3 @@ FROM payment p
 WHERE payment_date 
 NOT BETWEEN  '2007-02-19' AND '2007-02-20' 
 AND staff_id = 2
-
-
-
-/*
- * remember if you usin and must be after betwen 
- * hmm checy OR
- */
-
-SELECT payment_id , staff_id , payment_id  
-FROM payment p 
-WHERE payment_date >  '2007-02-19' 
-
-SELECT payment_id , staff_id , payment_id  
-FROM payment p 
-WHERE payment_date !=  '2007-02-19' 
-AND  staff_id = 2
-
-
-SELECT count(payment_id) 
-FROM payment p 
-WHERE amount = 0
-
-SELECT count(payment_id) 
-FROM payment p 
-WHERE amount != 0
-
-SELECT (SELECT count(payment_id) 
-FROM payment p 
-WHERE amount = 0) / count(payment_id) * 100
-
-
-
-FROM payment p 
