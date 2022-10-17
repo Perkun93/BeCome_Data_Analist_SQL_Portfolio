@@ -108,7 +108,7 @@ ORDER BY sum(amount) DESC LIMIT 5
  * Look how use IN and NOT IN 
  */
 
-SELECT customer_id, sum(amount)
+SELECT customer_id, sum(amount), count(customer_id) AS transactions
 FROM payment p 
 WHERE customer_id IN  (87,477,273,51)
 GROUP BY 1 
@@ -263,6 +263,7 @@ ON f.film_id = f.film_id
 GROUP BY 1,2,3
 ORDER BY count(fa.film_id)  DESC 
 LIMIT 5
+
 /*
  * most amount film 
  */
@@ -336,18 +337,41 @@ LIMIT 5
  *procent zarabku sklepu w oparciu o date 
 */
 
+/*
+ * suma stocku sklepu w oparciu o wymiane 
+ */
 
 
+SELECT * FROM inventory i 
 
-SELECT *
-FROM address a 
+SELECT * FROM store s 
 
-SELECT *
-FROM city c 
+SELECT * 
+FROM film f 
 
-SELECT *
-FROM country c 
+SELECT s.store_id , sum(f.replacement_cost)  
+FROM film 						AS f 
+LEFT JOIN inventory				AS i 
+ON f.film_id = i.film_id 
+LEFT JOIN store 				AS s 
+ON i.store_id = s.store_id
+GROUP BY 1
+ORDER BY sum(f.replacement_cost) DESC 
 
+/*
+ * daje nam to pytanie gdzie sa gilmy z pozycji 3 
+ */
+SELECT i.film_id _id , sum(f.replacement_cost), f.film_id 
+FROM film 						AS f 
+LEFT JOIN inventory				AS i 
+ON f.film_id = i.film_id
+WHERE i.store_id IS NULL 
+GROUP BY 1,3
+ORDER BY sum(f.replacement_cost) DESC 
+
+/*
+ * As you see 
+ */
 /*
  * top order city sale
  */
