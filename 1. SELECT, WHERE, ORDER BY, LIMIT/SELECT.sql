@@ -49,7 +49,7 @@ FROM customer c
 ORDER BY first_name DESC 
 
 /*
- * Ascending sort is set up amtomaticli 
+ * Ascending sort is set up automaticli 
  * You can sort more than one colum 
  * And instead of column name you can use number of column 
  * and sort using cuple column 
@@ -100,7 +100,13 @@ FROM customer c
 WHERE first_name LIKE 'H%' AND 
 last_name LIKE '__r%'
 
+
+
+
+
 /*
+ * 
+ *  SPRAWDZIC
  * jak mozesz zobaczyv % odpowanda za wszyskie znaki nie wana jest dlugosc lecz _ odpowada za kazdy pojedynczy znak 
  */
 
@@ -211,3 +217,12 @@ FROM payment p
 WHERE payment_date 
 NOT BETWEEN  '2007-02-19' AND '2007-02-20' 
 AND staff_id = 2
+
+/*
+ * Let's compare sale between store on date 15-02-2007
+ */
+
+SELECT *
+FROM payment p 
+WHERE  payment_date  
+BETWEEN '2007-02-15' AND '2007-02-17'

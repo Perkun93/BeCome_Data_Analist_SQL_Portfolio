@@ -184,6 +184,12 @@ INNER JOIN actor		AS a
 ON fa.actor_id = a.actor_id 
 
 
+SELECT fa.actor_id, fa.film_id, a.first_name , a.last_name  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+
+
 SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
@@ -228,7 +234,7 @@ ORDER BY count(fa.film_id)  DESC
 SELECT *
 FROM film f 
 
-SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name,  avg(f.rental_rate) AS avrage_rental  
+SELECT fa.actor_id, round(count( fa.film_id),1) AS many_films, a.first_name , a.last_name,  avg(f.rental_rate) AS avrage_rental  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
