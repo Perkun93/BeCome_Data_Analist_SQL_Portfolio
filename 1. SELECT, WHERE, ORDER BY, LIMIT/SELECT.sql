@@ -6,7 +6,7 @@ SELECT *
 FROM customer c 
 
 /*
- * Have you see * give us full Customer table
+ * Have you seen * give us full Customer table
  * Now we SELECT First name , last name and email. Let's GO 
 */
 
@@ -14,7 +14,7 @@ SELECT first_name , last_name ,email
 FROM customer c 
 
 /*
- * Good job. Now we think... What if we need just 10 first row ? 
+ * Good job. Now you think... What if we need just 10 first row ? 
  * It's time to use LIMIT
 */
 
@@ -24,7 +24,7 @@ LIMIT 10
 
 /*
  * From those 10 rows we are interesting only three rows between 4 and 7  
- * On this situlation you could using OFFSET is very simple.   	
+ * On this situation you could using OFFSET is very simple.   	
 */
 
 
@@ -33,14 +33,14 @@ FROM customer c
 LIMIT 3 OFFSET 3
 
 /*
- * This can be little bit confused for you if you don't know why I had set OFFSET on 3 
- * That vey simple. If we want get record 4 we begin from row 3 this is point zero for sql next one will be this row witch we looking.
+ * This can be little bit confused for you if you don't know why I had set up OFFSET on 3 
+ * That vety simple. If we want get record 4 we begin from row 3 this is point zero for sql next one will be this row witch we looking.
 */
 
 /*
  * All right now we look how we can sort descending our recored 
- * To sort record we using ORDER BY ... 
- * Hmmm and you have good think. We should like use DESC to sort Descending
+ * To sort record we are using ORDER BY ... 
+ * We are should use DESC to sort Descending
  *
 */
 
@@ -49,10 +49,9 @@ FROM customer c
 ORDER BY first_name DESC 
 
 /*
- * Ascending sort is set up automaticli 
- * You can sort more than one colum 
+ * Ascending sort is set up automatically
+ * You can sort more than one column
  * And instead of column name you can use number of column 
- * and sort using cuple column 
  */
 
 SELECT first_name , last_name ,email 
@@ -61,9 +60,9 @@ ORDER BY 1, 2 DESC
 
 
 /*
-* Lets go. Time to first where.
-* It is query to filter our record. Hmm ofcoure time for check this on pratise 
-* Finde customer with ID = 15 
+* Lets go. Time for your first WHERE.
+* It is query to filter our record. Hmm ofcourse time for check this in practice  
+* Find customer with ID = 15 
 */
 
 
@@ -73,7 +72,7 @@ WHERE customer_id = 15
 
 
 /*
- * We looking customare Alan name  
+ * We looking customer WHEARE first name is 'Alan'   
  */
 
 SELECT customer_id , first_name , last_name ,email 
@@ -81,7 +80,7 @@ FROM customer c
 WHERE first_name = 'Alan'
 
 /*
- * Grate job. next step will be using LIKE. Yea LIKE look how it working
+ * Great job. Next step will be using LIKE. Yeah LIKE look how it working
  */
 
 SELECT customer_id , first_name , last_name ,email 
@@ -91,7 +90,7 @@ WHERE first_name LIKE 'H%'
 
 
 /*
- * I use special mark % that mean after H can be everything.
+ * I had used special mark %. That mean after H can be everything.
  * Just have look 
  */
 
@@ -105,21 +104,31 @@ last_name LIKE '__r%'
 
 
 /*
- * 
- *  SPRAWDZIC
- * jak mozesz zobaczyv % odpowanda za wszyskie znaki nie wana jest dlugosc lecz _ odpowada za kazdy pojedynczy znak 
+ * Look below  
+ * We are compare LIKE with using ___ and %
  */
+
+
+SELECT * 
+FROM customer c 
+WHERE first_name LIKE '__'
+
+SELECT * 
+FROM customer c 
+WHERE first_name NOT LIKE '__'
+
+SELECT * 
+FROM customer c 
+WHERE first_name LIKE '%'
+
+SELECT * 
+FROM customer c 
+WHERE first_name NOT LIKE '%'
 
 
 /*
- * pora na cos nowego
- */
-
-SELECT *
-FROM payment p 
-
-/* wyciagnijmy cene produktow funkcja count liczt ilisc wierszy lecz gdy dodamy distinc to uzyskamly liczbe unikal;nych wierszy wiec sprawdzmy to 
- * 
+ * Time for count somethings 
+ * Lets start
  */
 
 SELECT amount 
@@ -129,26 +138,30 @@ SELECT count(amount)
 FROM payment p 
 
 /*
- * wynik 14596
+ * Score is 14596
+ * We can using alias to name column 
+ */
+
+SELECT count(amount) AS all_amount
+FROM payment p 
+
+/*
+ * Lets we check unique rows in AMOUNT column
  */
 
 SELECT count(DISTINCT (amount))
 FROM payment p 
 
-/*
-* wynik 19
-* wiec to dziala 
- **/
  
 /*
-* sprawdzmy najwyzsza cene uzywyajac max
+* Try use function MAX
 */
 
 SELECT max(amount)
 FROM payment p 
 
 /*
- * i najnizsza uzyjacac min 
+ * And function MIN
 */
 
 SELECT min(amount)
@@ -156,22 +169,26 @@ FROM payment p
 
 
 /*
-* jak widzisz minimalna cena jest 0 cos tu nie gra wiedz sprawmy co przykominajac sobie where 
+ * Have you seen function MIN returned us volume 0  
+ * We need check this
 */
 
 SELECT *
 FROM payment p 
 WHERE amount = 0
 
-SELECT count(payment_id) 
+SELECT count(payment_id) AS no_payments
 FROM payment p 
 WHERE amount = 0
 
 /*
- * 24 klientow nie zaplacilo w sklepie 
-*/
+ * For 24 the transaction we did not receive payment
+ */
 
-
+/*
+ * Next step time for AND and OR
+ * We are use this with LIKE 
+ */
 
 SELECT customer_id , first_name , last_name ,email 
 FROM customer c
@@ -183,19 +200,21 @@ FROM customer c
 WHERE first_name LIKE 'H%' OR 
 last_name NOT LIKE '__r%'
 
+
+SELECT customer_id , first_name , last_name ,email 
+FROM customer c
+WHERE first_name LIKE 'H%' AND 
+last_name LIKE '__r%'
+
+
+SELECT customer_id , first_name , last_name ,email 
+FROM customer c
+WHERE first_name LIKE 'H%' AND 
+last_name NOT LIKE '__r%'
+
+
 /*
- * You can very SIMPLE sort date 
- * look on payment table
-*/
-
-SELECT *
-FROM payment p 
-
-
-
-
-/*
- * try sort pament date between 
+ * Important is sorting on date 
  */
 
 
@@ -203,9 +222,9 @@ SELECT payment_id , staff_id , payment_id
 FROM payment p 
 WHERE payment_date 
 BETWEEN  '2007-02-19' AND '2007-02-20' 
-AND staff_id = 2
 
-SELECT count(payment_id)  
+
+SELECT payment_id , staff_id , payment_id  
 FROM payment p 
 WHERE payment_date 
 BETWEEN  '2007-02-19' AND '2007-02-20' 
@@ -217,6 +236,21 @@ FROM payment p
 WHERE payment_date 
 NOT BETWEEN  '2007-02-19' AND '2007-02-20' 
 AND staff_id = 2
+
+SELECT count(payment_id)  
+FROM payment p 
+WHERE payment_date 
+BETWEEN  '2007-02-19' AND '2007-02-20' 
+AND staff_id = 2
+
+SELECT count(payment_id)  
+FROM payment p 
+WHERE payment_date 
+BETWEEN  '2007-02-19' AND '2007-02-20' 
+AND staff_id = 2 
+OR customer_id BETWEEN '33' AND '50' 
+
+
 
 /*
  * Let's compare sale between store on date 15-02-2007
