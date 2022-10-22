@@ -169,7 +169,7 @@ FROM payment p
 
 
 /*
- * Have you seen function MIN returned us volume 0  
+ * Have you seen function MIN returns us volume 0  
  * We need check this
 */
 
@@ -182,7 +182,7 @@ FROM payment p
 WHERE amount = 0
 
 /*
- * For 24 the transaction we did not receive payment
+ * For 24 the transaction we did not received payment
  */
 
 /*
@@ -249,14 +249,3 @@ WHERE payment_date
 BETWEEN  '2007-02-19' AND '2007-02-20' 
 AND staff_id = 2 
 OR customer_id BETWEEN '33' AND '50' 
-
-
-
-/*
- * Let's compare sale between store on date 15-02-2007
- */
-
-SELECT *
-FROM payment p 
-WHERE  payment_date  
-BETWEEN '2007-02-15' AND '2007-02-17'

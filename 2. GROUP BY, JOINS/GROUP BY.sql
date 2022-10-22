@@ -1,19 +1,17 @@
 /*
- * nauczymy sie dzis nowej funkcji grupopania 
- * jak wiesz z poprzednich wierszow do filtrowaia uzywany WHARE 
- * lecz mozemy pogrupowac nasze wyniki wzgledem czegos np imienia nazwiska kraju pochodzenia czy nawet ilosci zamowien ....
- *  wiec co zrob my to sprawdzmy jak to dziala
- * uzywajac i uczac sie group by  
+ * Today we will learn how group by our result
+ * As you know we are using WHEARE to filtering rows 
+ * But remeber GROUP BY we are using alwase after WHERE 
  */
 
 SELECT *
 FROM customer c 
 
 /*
- * mamy juz wszuuystki customerow uzywajac aliasow tzn podpisania kolumn 
- * zobaczmy ile klientow w danym sklepie
- * pogrupujemy klientow po customer id kazdy klient ma unikalne customer id 
- */
+ * Now we see full customer table
+ * Next step. We will compare how many customers by store 
+ * Let's GROUP BY customers using customer_id. Customer_id is a unique number 
+*/
 
 
 SELECT store_id, count(customer_id) AS ALL_transaction 
@@ -21,12 +19,9 @@ FROM customer c
 GROUP BY 1
 
 /*
- * brawo mamy to jak widzisz w store id 1 bylo najwiecej tranzakcji 
- */
-
-/*
- * sprawdmy ktroy sklep dal najwiecej tranzakcji
- */
+ * Very well. Now you see how GROUP BY does work 
+ * Check wich store give us more profit
+*/
 
 SELECT staff_id , count(*)
 FROM payment p 
@@ -34,9 +29,8 @@ GROUP BY 1
 ORDER BY count(*) DESC  
 
 /*
- * a teraz zobaczmy jaka byla ich suma 
+ * Add sum all amount transactions 
  */
-
 
 SELECT staff_id , count(*) AS transctions ,  sum(amount) AS sum_of_amount 
 FROM payment p 
