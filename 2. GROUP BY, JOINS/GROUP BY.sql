@@ -20,7 +20,7 @@ GROUP BY 1
 
 /*
  * Very well. Now you see how GROUP BY does work 
- * Check wich store give us more profit
+ * Check which store give us more profit
 */
 
 SELECT staff_id , count(*)
@@ -38,23 +38,26 @@ GROUP BY 1
 ORDER BY sum(amount) DESC 
 
 /*
- * sql wciaga. juz wiez ktory sklep jest najbardzeiej dochodowu
- * ale pamietaj uzywajac group by i order by musisz sortowac zawsze po pelnej nazwie 
- * uzytej w select. sql nie lubi aliasow w order by 
+ * SQL is really cool. I already know which store is the most profitable
+ * SQL don't like alias in ORDER BY that's why we are using full name in ORDER BY
  */
 
 /*
- * check stock inventory group by film id 
+ * Check stock inventory group by film id 
  */
 
 SELECT *
 FROM inventory i 
 
-SELECT store_id , count( store_id) AS stock , film_id 
+SELECT store_id , count(store_id) AS stock , film_id 
 FROM inventory i
 GROUP BY  1,3
 ORDER BY count(store_id) DESC
 
+/*
+ * To sort aggregate functions we are using HAVING 
+*/
+ 
 SELECT store_id , count( store_id) AS stock  , film_id 
 FROM inventory i
 GROUP BY  1,3
@@ -70,7 +73,7 @@ HAVING  store_id = 1
 
 
 /*
- * SQL lubi kolejnosc 
+ * IMPORTANT
  * 1. SELECT
  * 2. FROM
  * 3. JOIN (later)
@@ -82,7 +85,7 @@ HAVING  store_id = 1
  */
 
 /*
- * pratcise with group by and where 
+ * Practice with group by and where 
  * 
  */ 
 
@@ -94,8 +97,7 @@ ORDER BY sum(amount) DESC LIMIT 5
 
 
 /*
- * as you se != return us all without customer id =1
- * I  show you how select more 
+ * as you se != return us all without customer id = 1 
  */
 
 /*
@@ -123,10 +125,8 @@ FROM payment p
 WHERE customer_id = 148
 
 /*
- * we will relationsship beetwen mpaa rating and a replemace cost 
+ * Now we are check relationship between MPAA rating and a replace cost
  */
-
-
 
 SELECT *
 FROM film f
@@ -137,8 +137,8 @@ FROM film f
 GROUP BY 1
 
 /*
- * great job but looks on numbers its not looking good 
- * lets use ROUND 
+ * Great job but looks on numbers it's not looking good 
+ * Lets use ROUND 
  */
 
 SELECT rating , ROUND(AVG(replacement_cost), 2) AS avg_replacement_cost
@@ -147,7 +147,7 @@ GROUP BY 1
 ORDER BY AVG(replacement_cost) DESC 
 
 /*
- * now we chceck top 5 customer id 
+ * Now we check top 5 customer id 
  */
 
 SELECT customer_id, sum(amount) 
@@ -157,13 +157,61 @@ ORDER BY sum(amount) DESC
 LIMIT 5
 
 /*
- * time to joins 
- *  Joins lacza tabele po danym kluczu 
- * zobaczmy jeden z joinow 
- * Inner join. laczy tabele A z tabela B po wspolnym kluczu ,ktorym moze byc film ID
- * dla tego sprawdzmy 5 aktorow najczesciej pojawiajacych sie w filmach  
- * jak mowi inner czyli wewnetrzny.
+ * Time for joins 
+ * A JOIN is a means for combining fields from two tables by using values common to each.
+ * SQL JOINS... INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN , CROSS JOIN 
  */
+
+/* INEER JOIN 
+ *
+ * Table A	Table B
+ * 1		10
+ * 2		1
+ * 3   		3
+ * 4		3	
+ * 5		28
+ * Return us  1 - 1, 3 - 3, 3 - 3.
+ *
+ * LEFT JOIN
+ *
+ * Table A	Table B
+ * 1		10
+ * 2		1
+ * 3   		3
+ * 4		3	
+ * 5		28
+ * Return us  1 - 1, 2, 3 - 3, 4, 5
+ * 
+ * RIGHT JOIN
+ *
+ * Table A	Table B
+ * 1		10
+ * 2		1
+ * 3   		3
+ * 4		3	
+ * 5		28
+ * Return us  10, 1 - 1, 3 - 3, 3 - 3, 28
+ *
+ * FULL OUTER JOIN
+ *
+ * Table A	Table B
+ * 1		10
+ * 2		1
+ * 3   		3
+ * 4		3	
+ * 5		28
+ * Return us  1 - 1, 3 - 3
+ *
+ * CROSS JOIN
+ *
+ * Table A	Table B
+ * 1		10
+ * 2		1
+ * 3   		3
+ * 4		3	
+ * 5		28
+ * Return us  1 - 10, 1 - 1, 1 - 3, 1 - 3, 1 - 28, 2 - 10, 2 - 1, 2 - 3, 2 - 3, 2 - 28 .....
+
 
 
 SELECT * 
@@ -191,38 +239,6 @@ ON fa.actor_id = a.actor_id
 GROUP BY 1,3,4
 ORDER BY count(fa.film_id)  DESC 
 
-/*
- * opisac join
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- * kto
- */
 
 
 SELECT *
