@@ -55,7 +55,7 @@ GROUP BY  1,3
 ORDER BY count(store_id) DESC
 
 /*
- * To sort aggregate functions we are using HAVING 
+ * To sort agregate functions we are using HAVING 
 */
  
 SELECT store_id , count( store_id) AS stock  , film_id 
@@ -85,20 +85,40 @@ HAVING  store_id = 1
  */
 
 /*
- * Practice with group by and where 
+ * Practice with GROUP BY and WHERE 
  * 
  */ 
 
+
 SELECT customer_id, staff_id, sum(amount)
 FROM payment p 
-WHERE customer_id != (184)
+GROUP BY 1,2 
+ORDER BY sum(amount) DESC LIMIT 5 
+
+
+SELECT customer_id, staff_id, sum(amount)
+FROM payment p 
+WHERE customer_id != 137
 GROUP BY 1,2 
 ORDER BY sum(amount) DESC LIMIT 5 
 
 
 /*
- * as you se != return us all without customer id = 1 
+ * As you see != return us all without customer id = 184
+ * You can use =, !=, <, > 
  */
+
+/*
+ * Or you can use IN and on this situation NOT IN 
+ * Have you see number is in bracket 
+ * Because IN or NOT IN defines the set 
+ */
+
+SELECT customer_id, staff_id, sum(amount)
+FROM payment p 
+WHERE customer_id NOT IN (137)
+GROUP BY 1,2 
+ORDER BY sum(amount) DESC LIMIT 5 
 
 /*
  * Look how use IN and NOT IN 
@@ -211,8 +231,12 @@ LIMIT 5
  * 4		3	
  * 5		28
  * Return us  1 - 10, 1 - 1, 1 - 3, 1 - 3, 1 - 28, 2 - 10, 2 - 1, 2 - 3, 2 - 3, 2 - 28 .....
+*/
 
-
+/*
+ * Do this FIRST JOIN
+ * Combin fields from table FILMS and ACTOR using INNER JOIN
+ */
 
 SELECT * 
 FROM film f 
@@ -225,49 +249,36 @@ FROM film_actor 		AS fa
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
 
+/*
+ * To combining fields from two tables we are need alias table 
+ */
+
 
 SELECT fa.actor_id, fa.film_id, a.first_name , a.last_name  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
 
+/*
+ * Time for traning open your mind
+ */
 
-SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name  
+
+SELECT fa.actor_id, count( fa.film_id) AS Performed_films, a.first_name , a.last_name  
 FROM film_actor 		AS fa 
 INNER JOIN actor		AS a 
 ON fa.actor_id = a.actor_id 
 GROUP BY 1,3,4
 ORDER BY count(fa.film_id)  DESC 
+LIMIT 10
 
-
-
-SELECT *
-FROM film f 
-
-SELECT fa.actor_id, round(count( fa.film_id),1) AS many_films, a.first_name , a.last_name,  avg(f.rental_rate) AS avrage_rental  
-FROM film_actor 		AS fa 
-INNER JOIN actor		AS a 
-ON fa.actor_id = a.actor_id 
-LEFT JOIN film 		AS f
-ON f.film_id = f.film_id 
-GROUP BY 1,3,4
-ORDER BY count(fa.film_id)  DESC 
-LIMIT 5
-
-
-SELECT fa.actor_id, count( fa.film_id) AS many_films, a.first_name , a.last_name, avg(f.rental_rate) AS avrage_rental  
-FROM film_actor 		AS fa 
-INNER JOIN actor		AS a 
-ON fa.actor_id = a.actor_id 
-INNER  JOIN film 		AS f
-ON f.film_id = f.film_id 
-GROUP BY 1,3,4
-ORDER BY count(fa.film_id)  DESC 
-LIMIT 5
+/*
+ * We can check 
+ */
 
 SELECT count(*) 
 FROM film_actor fa 
-WHERE actor_id = 60
+WHERE actor_id = 107
 
 
 SELECT fa.actor_id, a.first_name , a.last_name,  count( fa.film_id) AS many_films, round(sum(f.rental_rate),2) AS sum_amount  
@@ -398,3 +409,16 @@ SELECT district AS City,count(DISTINCT city_id) AS sum_city
 FROM address a 
 GROUP BY 1
 ORDER BY count(DISTINCT city_id) DESC 
+
+
+
+
+SELECT fa.actor_id, round(count( fa.film_id),1) AS many_films, a.first_name , a.last_name,  avg(f.rental_rate) AS avrage_rental  
+FROM film_actor 		AS fa 
+INNER JOIN actor		AS a 
+ON fa.actor_id = a.actor_id 
+LEFT JOIN film 		AS f
+ON f.film_id = f.film_id 
+GROUP BY 1,3,4
+ORDER BY count(fa.film_id)  DESC 
+LIMIT 5
