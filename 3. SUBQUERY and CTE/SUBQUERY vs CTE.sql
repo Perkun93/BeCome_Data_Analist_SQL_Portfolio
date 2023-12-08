@@ -1,40 +1,42 @@
-
-
-
+-- Retrieve all columns from the payment table.
 SELECT *
-FROM payment p 
-
-
-/*
- * sprawdmy jaki jest procent zorowych tranzakcji dla obu sklepoiw uzywajac wczesniej nabyterj wiedzyt i poznajac nowa funkcje tzn agregbacje
-*/
-
-SELECT sum(amount) AS sum_payments
-FROM payment p 
-WHERE staff_id = 1
-
-SELECT sum(amount) 
-FROM payment p 
-WHERE staff_id = 2
+FROM payment p;
 
 /*
- *  jak juz mamy wartosc wszystkichj tranzakjci z sklepu 1 sprawdzmy ile ich bylo 
+ * Let's check what percentage of zero-value transactions are there for both stores
+ * using previously acquired knowledge and exploring a new function, namely aggregation.
 */
 
-SELECT count(DISTINCT(payment_id))  AS ALL_PAYMENTS 
-FROM payment p 
-WHERE staff_id = 1
+-- Calculate the total sum of payments made by staff_id 1.
+SELECT SUM(amount) AS sum_payments
+FROM payment p
+WHERE staff_id = 1;
 
+-- Calculate the total sum of payments made by staff_id 2.
+SELECT SUM(amount) 
+FROM payment p
+WHERE staff_id = 2;
 
-SELECT count(payment_id) 
-FROM payment p 
+/*
+ * Now that we have the total value of all transactions from store 1, let's find out how many of them occurred.
+*/
+
+-- Count the number of distinct payment_ids for transactions made by staff_id 1.
+SELECT COUNT(DISTINCT(payment_id)) AS ALL_PAYMENTS 
+FROM payment p
+WHERE staff_id = 1;
+
+-- Count the number of payment_ids for transactions with an amount of 0 made by staff_id 1.
+SELECT COUNT(payment_id) 
+FROM payment p
 WHERE amount = 0
-AND staff_id = 1
+AND staff_id = 1;
 
-
-SELECT (SELECT count(payment_id) 
-FROM payment p 
-WHERE amount = 0
-AND staff_id = 1
-) * 100 /  count(DISTINCT(payment_id)) 
-FROM payment p 
+-- Calculate the percentage of zero-value transactions out of the total transactions for staff_id 1.
+SELECT 
+  (SELECT COUNT(payment_id) 
+    FROM payment p 
+    WHERE amount = 0
+    AND staff_id = 1
+  ) * 100 / COUNT(DISTINCT(payment_id)) 
+FROM payment p;
